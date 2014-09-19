@@ -1,7 +1,7 @@
 package featurea.lwjgl;
 
 import de.matthiasmann.twl.utils.PNGDecoder;
-import featurea.engine.Engine;
+import featurea.util.ClassLoaderUtil;
 import featurea.util.Size;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
@@ -14,9 +14,9 @@ public final class TextureLoader {
 
   private TextureLoader(){}
 
-  public static Size load(String file, Engine engine){
+  public static Size load(String file, ClassLoaderUtil classLoader){
     try {
-      PNGDecoder dec = new PNGDecoder(engine.resources.fileSystem.classLoader.getResourceAsStream(file));
+      PNGDecoder dec = new PNGDecoder(classLoader.getResourceAsStream(file));
       float width = dec.getWidth();
       float height = dec.getHeight();
       ByteBuffer buffer = BufferUtils.createByteBuffer((int) (4 * width * height));

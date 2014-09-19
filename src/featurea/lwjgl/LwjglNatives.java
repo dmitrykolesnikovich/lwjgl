@@ -1,19 +1,19 @@
 package featurea.lwjgl;
 
-import featurea.engine.*;
 import featurea.util.Array;
+import featurea.util.ClassLoaderUtil;
 import featurea.util.Platform;
 
 public final class LwjglNatives {
 
   private LwjglNatives(){}
 
-  public static void addToJavaLibraryPath(Engine engine){
+  public static void addToJavaLibraryPath(ClassLoaderUtil classLoader){
     if(System.getProperty("org.lwjgl.librarypath")==null){
       for(String lib : getLibs()){
-        engine.resources.fileSystem.classLoader.natives.addNativeLib(lib);
+        classLoader.natives.addNativeLib(lib);
       }
-      System.setProperty("org.lwjgl.librarypath", engine.resources.fileSystem.classLoader.natives.getNativesDir());
+      System.setProperty("org.lwjgl.librarypath", classLoader.natives.getNativesDir());
     }
   }
 
