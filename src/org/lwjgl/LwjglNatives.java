@@ -1,17 +1,12 @@
 package org.lwjgl;
 
-import featurea.util.ClassPath;
-import featurea.util.Environment;
-import featurea.util.FileUtil;
-import featurea.util.Files;
-
 import java.lang.reflect.Field;
 import java.util.Arrays;
-import java.util.jar.JarFile;
 
 public final class LwjglNatives {
-  static {
-  }
+  public static final String externalRootPath = System.getProperty("user.home");
+  public static final String homeDir = externalRootPath + "/.featurea";
+  public static final String nativesDir = homeDir + "/natives";
 
   private LwjglNatives() {
   }
@@ -23,15 +18,15 @@ public final class LwjglNatives {
   }
 
   private void performRegisterNativeLibsInJavaLibraryPath() {
-    JarFile jarFile = isJarFile();
+    /*JarFile jarFile = isJarFile();
     if (jarFile != null) {
       Files.getContextFiles().addJarFile(jarFile);
       ClassPath.getContextClassPath().addClasspath(jarFile);
-    }
-    setLibraryPath(Environment.nativesDir);
+    }*/
+    setLibraryPath(nativesDir);
   }
 
-  private JarFile isJarFile() {
+  /*private JarFile isJarFile() {
     try {
       String file = FileUtil.getFile(LwjglNatives.class);
       if (file != null && file.endsWith(".jar")) {
@@ -41,7 +36,7 @@ public final class LwjglNatives {
       skip.printStackTrace();
     }
     return null;
-  }
+  }*/
 
   private void setLibraryPath(String libraryPath) {
     System.setProperty("org.lwjgl.librarypath", libraryPath);
